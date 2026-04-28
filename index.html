@@ -5,10 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MoonCity NEO — Get GO Key</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+  *{box-sizing:border-box;margin:0;padding:0;}
   :root{
     --bg:#0a0a0c;--bg1:#111114;--bg2:#1a1a1e;--bg3:#252529;
     --line:rgba(255,255,255,.06);
@@ -27,274 +26,244 @@
     background-size:48px 48px;
     mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 80%);}
   .wrap{position:relative;z-index:1;width:100%;max-width:520px;}
-  .brand{display:flex;align-items:center;justify-content:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.18em;color:var(--acc);margin-bottom:24px;text-transform:uppercase;}
-  .brand .dot{width:6px;height:6px;border-radius:50%;background:var(--acc);box-shadow:0 0 12px var(--acc);animation:pulse 2s ease-in-out infinite;}
+  .brand{display:flex;align-items:center;justify-content:center;gap:10px;
+    font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;
+    letter-spacing:.18em;color:var(--acc);margin-bottom:24px;text-transform:uppercase;}
+  .brand .dot{width:6px;height:6px;border-radius:50%;background:var(--acc);
+    box-shadow:0 0 12px var(--acc);animation:pulse 2s ease-in-out infinite;}
   @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
   h1{font-size:36px;font-weight:700;line-height:1.1;text-align:center;margin-bottom:12px;letter-spacing:-.02em;}
-  h1 .accent{background:linear-gradient(135deg,var(--acc) 0%,#ff9a4a 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
-  .subtitle{text-align:center;color:var(--t1);font-size:14px;line-height:1.5;margin-bottom:36px;max-width:420px;margin-left:auto;margin-right:auto;}
-  .card{background:linear-gradient(180deg,var(--bg1) 0%,var(--bg) 100%);border:1px solid var(--line);border-radius:18px;padding:32px 28px;box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 0 1px var(--acc-glow) inset;position:relative;overflow:hidden;}
-  .card::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:60%;height:1px;background:linear-gradient(90deg,transparent,var(--acc),transparent);}
-  .steps{display:flex;justify-content:space-between;margin-bottom:24px;gap:8px;}
+  h1 .accent{background:linear-gradient(135deg,var(--acc) 0%,#ff9a4a 100%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+  .subtitle{text-align:center;color:var(--t1);font-size:14px;line-height:1.5;
+    margin-bottom:36px;max-width:420px;margin-left:auto;margin-right:auto;}
+  .card{background:linear-gradient(180deg,var(--bg1) 0%,var(--bg) 100%);
+    border:1px solid var(--line);border-radius:18px;padding:32px 28px;
+    box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 0 1px var(--acc-glow) inset;
+    position:relative;overflow:hidden;}
+  .card::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+    width:60%;height:1px;background:linear-gradient(90deg,transparent,var(--acc),transparent);}
+  .steps{display:flex;justify-content:space-between;margin-bottom:28px;gap:8px;}
   .step{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;position:relative;}
-  .step-num{width:28px;height:28px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:var(--t2);transition:all .3s;}
+  .step-num{width:28px;height:28px;border-radius:50%;background:var(--bg2);
+    border:1px solid var(--line);display:flex;align-items:center;justify-content:center;
+    font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;
+    color:var(--t2);transition:all .3s;}
   .step.active .step-num{background:var(--acc);border-color:var(--acc);color:#0a0a0c;box-shadow:0 0 0 4px var(--acc-glow);}
   .step.done .step-num{background:var(--green);border-color:var(--green);color:#0a0a0c;}
-  .step-label{font-size:10px;color:var(--t2);text-transform:uppercase;letter-spacing:.1em;font-weight:500;text-align:center;}
+  .step-label{font-size:10px;color:var(--t2);text-transform:uppercase;letter-spacing:.1em;font-weight:500;}
   .step.active .step-label{color:var(--acc);}
   .step.done .step-label{color:var(--green);}
-  .step:not(:last-child)::after{content:'';position:absolute;top:14px;left:calc(50% + 18px);right:calc(-50% + 18px);height:1px;background:var(--line);}
+  .step:not(:last-child)::after{content:'';position:absolute;top:14px;
+    left:calc(50% + 18px);right:calc(-50% + 18px);height:1px;background:var(--line);}
   .step.done:not(:last-child)::after{background:var(--green);}
-  /* IP инфо */
-  .ip-note{background:rgba(255,192,129,.05);border:1px solid rgba(255,192,129,.12);border-radius:8px;padding:10px 14px;margin-bottom:18px;font-size:11px;color:var(--t1);line-height:1.5;text-align:center;}
-  .ip-note b{color:var(--acc);}
-  /* кнопки */
-  .btn-primary{width:100%;height:52px;background:var(--acc);color:#0a0a0c;border:none;border-radius:12px;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:transform .15s,box-shadow .25s,opacity .15s;box-shadow:0 8px 24px var(--acc-glow);}
+  .warn-box{background:rgba(255,192,129,.06);border:1px solid rgba(255,192,129,.2);
+    border-radius:8px;padding:10px 14px;margin-bottom:16px;
+    font-size:11px;color:var(--acc);line-height:1.6;text-align:center;}
+  .btn-primary{width:100%;height:56px;background:var(--acc);color:#0a0a0c;border:none;
+    border-radius:12px;font-family:inherit;font-size:15px;font-weight:600;
+    cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;
+    transition:transform .15s,box-shadow .25s,opacity .15s;
+    box-shadow:0 8px 24px var(--acc-glow);position:relative;overflow:hidden;}
   .btn-primary:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 14px 32px var(--acc-glow);}
-  .btn-primary:active:not(:disabled){transform:translateY(0);}
   .btn-primary:disabled{opacity:.5;cursor:not-allowed;}
-  /* key box */
-  .key-box{display:none;background:var(--bg2);border:1px solid var(--acc-glow);border-radius:12px;padding:18px 20px;margin-top:18px;}
+  .key-box{display:none;background:var(--bg2);border:1px solid var(--acc-glow);
+    border-radius:12px;padding:18px 20px;margin-top:18px;}
   .key-box.show{display:block;animation:slideIn .4s ease;}
   @keyframes slideIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
   .key-label{font-size:10px;color:var(--t2);text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px;font-weight:500;}
-  .key-value{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:600;color:var(--acc);letter-spacing:.04em;word-break:break-all;user-select:all;-webkit-user-select:all;}
-  .key-meta{display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:14px;border-top:1px solid var(--line);font-size:11px;color:var(--t2);}
-  .copy-btn{background:transparent;border:1px solid var(--line);color:var(--t1);padding:6px 12px;border-radius:6px;cursor:pointer;font-family:inherit;font-size:11px;font-weight:500;transition:all .15s;display:inline-flex;align-items:center;gap:5px;}
+  .key-value{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:600;
+    color:var(--acc);letter-spacing:.04em;word-break:break-all;user-select:all;-webkit-user-select:all;}
+  .key-meta{display:flex;justify-content:space-between;align-items:center;
+    margin-top:14px;padding-top:14px;border-top:1px solid var(--line);font-size:11px;color:var(--t2);}
+  .copy-btn{background:transparent;border:1px solid var(--line);color:var(--t1);
+    padding:6px 12px;border-radius:6px;cursor:pointer;font-family:inherit;
+    font-size:11px;font-weight:500;transition:all .15s;display:inline-flex;align-items:center;gap:5px;}
   .copy-btn:hover{border-color:var(--acc);color:var(--acc);}
   .copy-btn.copied{border-color:var(--green);color:var(--green);}
-  /* статус */
-  .status{display:none;font-size:12px;margin-top:14px;padding:10px 14px;border-radius:8px;line-height:1.5;text-align:center;}
+  .status{display:none;text-align:center;font-size:13px;margin-top:14px;
+    padding:10px 14px;border-radius:8px;line-height:1.5;}
   .status.show{display:block;}
   .status.error{background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.25);color:var(--red);}
   .status.info{background:rgba(255,192,129,.06);border:1px solid var(--acc-glow);color:var(--acc);}
-  .status.ok{background:rgba(74,222,128,.06);border:1px solid rgba(74,222,128,.25);color:var(--green);}
-  /* spinner */
-  .spinner{width:18px;height:18px;border:2px solid rgba(0,0,0,.25);border-top-color:#0a0a0c;border-radius:50%;animation:spin .7s linear infinite;display:none;}
+  .foot{margin-top:32px;text-align:center;font-size:11px;color:var(--t2);line-height:1.7;}
+  .foot a{color:var(--t1);text-decoration:none;border-bottom:1px solid var(--line);}
+  .foot a:hover{color:var(--acc);}
+  .spinner{width:18px;height:18px;border:2px solid rgba(0,0,0,.25);
+    border-top-color:#0a0a0c;border-radius:50%;animation:spin .7s linear infinite;display:none;}
   .btn-primary.loading .spinner{display:block;}
   .btn-primary.loading .btn-text,.btn-primary.loading .btn-icon{display:none;}
   @keyframes spin{to{transform:rotate(360deg);}}
-  /* футер */
-  .foot{margin-top:28px;text-align:center;font-size:11px;color:var(--t2);line-height:1.7;}
-  .foot a{color:var(--t1);text-decoration:none;border-bottom:1px solid var(--line);}
-  .foot a:hover{color:var(--acc);}
-  @media(max-width:520px){h1{font-size:28px;}.card{padding:24px 18px;}}
 </style>
 </head>
 <body>
-
 <div class="wrap">
   <div class="brand"><span class="dot"></span>MOONCITY · KEY SYSTEM</div>
-
   <h1>Get your <span class="accent">GO</span> key</h1>
-  <p class="subtitle">Complete a quick checkpoint to receive a one-time activation key.<br>Unlocks GO plan for 12 hours.</p>
-
+  <p class="subtitle">Complete a quick checkpoint to receive a one-time key. It unlocks GO plan for 12 hours.</p>
+ 
   <div class="card">
     <div class="steps">
       <div class="step" id="step1"><div class="step-num">1</div><div class="step-label">Checkpoint</div></div>
       <div class="step" id="step2"><div class="step-num">2</div><div class="step-label">Generate</div></div>
-      <div class="step" id="step3"><div class="step-num">3</div><div class="step-label">Activate in app</div></div>
+      <div class="step" id="step3"><div class="step-num">3</div><div class="step-label">Activate</div></div>
     </div>
-
-    <div class="ip-note">
-      ⚠ The key is <b>bound to your network</b>. You must activate it from the same network where you received it. Don't share your key.
+ 
+    <div class="warn-box">
+      ⚠ Key is <b>bound to your network</b>. Activate it from the same Wi-Fi/network where you got it. Don't share it.
     </div>
-
-    <button class="btn-primary" id="btnMain" onclick="onAction()">
+ 
+    <button class="btn-primary" id="btnAction" onclick="onAction()">
       <span class="btn-text" id="btnText">Start Checkpoint</span>
-      <svg class="btn-icon" id="btnIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      <span class="btn-icon">→</span>
       <div class="spinner"></div>
     </button>
-
+ 
     <div class="status" id="status"></div>
-
+ 
     <div class="key-box" id="keyBox">
       <div class="key-label">Your GO Key — paste it in the app</div>
-      <div class="key-value" id="keyValue"></div>
+      <div class="key-value" id="keyValue">—</div>
       <div class="key-meta">
-        <span>Expires in <b id="keyTtl">24h</b> if not activated</span>
-        <button class="copy-btn" id="btnCopy" onclick="copyKey()">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-          Copy
-        </button>
+        <span>Valid <b id="keyTtl">24h</b> if not activated</span>
+        <button class="copy-btn" id="btnCopy" onclick="copyKey()">📋 Copy</button>
       </div>
     </div>
   </div>
-
+ 
   <div class="foot">
-    Got a key? Open MoonCity NEO → Keys tab → Check Key.<br>
-    Need help? <a href="https://discord.gg/GagwFFpwva" target="_blank" rel="noopener">Discord support</a>
+    Already have a key? Open MoonCity NEO → Keys tab → Check Key.<br>
+    Need help? <a href="https://discord.gg/GagwFFpwva" target="_blank">Discord support</a>
   </div>
 </div>
-
-<script type="module">
-import { initializeApp }          from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-import { getFunctions, httpsCallable } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-functions.js';
-
-// ─── Firebase config (публичные данные, безопасность через Firestore rules) ───
-const firebaseConfig = {
-  apiKey:            "AIzaSyBIKDndjPejGLvx4jWB8sjMEArhL8itOk8",
-  authDomain:        "mooncityauth.firebaseapp.com",
-  projectId:         "mooncityauth",
-  storageBucket:     "mooncityauth.appspot.com",
-  messagingSenderId: "764957948964",
-  appId:             "1:764957948964:web:dd90dc4e3996c0c7526cb1"
-};
-
-const app          = initializeApp(firebaseConfig, 'getkey');
-const fns          = getFunctions(app, 'europe-west1');
-const requestKeyFn = httpsCallable(fns, 'requestKey');
-
-// ─── work.ink ────────────────────────────────────────────────────────────────
-//
-// КАК НАСТРОИТЬ work.ink:
-//
-// 1. Зайди на https://dashboard.work.ink
-// 2. Перейди в Key System → Manage → Create Link
-//    Destination URL: https://work.ink/token
-//    (именно это — work.ink сам обработает редирект)
-//
-// 3. Перейди в Key System → Settings
-//    ⚠ ВАЖНО: ВЫКЛЮЧИ "Hash User IP" (Hash User IP = OFF)
-//    Это нужно чтобы работала IP-привязка к подсети /24
-//
-// 4. Нажми Link Override API
-//    Destination override: https://YOUR_GETKEY_SITE.pages.dev/?token={TOKEN}
-//    Замени YOUR_GETKEY_SITE на реальный домен своего Cloudflare Pages сайта
-//
-// 5. Скопируй итоговую ссылку вида: https://work.ink/123/your-link-name
-//    И вставь ниже в WORKINK_URL
-//
-// ИТОГОВЫЙ FLOW:
-//   Юзер → work.ink → checkpoint → редирект на getkey.html?token=UUID → Generate Key
-//
-const WORKINK_URL = 'https://work.ink/2xkx/key-system';
-// ─────────────────────────────────────────────────────────────────────────────
-
-// Стабильный fingerprint браузера
-function getFingerprint() {
-  let fp = localStorage.getItem('mc_fp_v2');
-  if (!fp) {
-    const buf = new Uint8Array(24);
-    crypto.getRandomValues(buf);
-    fp = 'fp_' + Array.from(buf).map(b => b.toString(16).padStart(2,'0')).join('');
-    localStorage.setItem('mc_fp_v2', fp);
-  }
-  // Добавляем слабые browser signals для уникальности
-  const sig = [
-    navigator.userAgent.slice(0,40),
-    screen.width + 'x' + screen.height,
-    new Date().getTimezoneOffset(),
-    navigator.language,
-  ].join('|');
-  const extra = btoa(sig).replace(/[^a-zA-Z0-9]/g,'').slice(0,20);
-  return fp + '_' + extra;
-}
-
-// DOM helpers
-const $ = id => document.getElementById(id);
-
-function showStatus(msg, type) {
-  const el = $('status');
-  el.className = 'status show ' + (type || 'info');
-  el.innerHTML = msg;
-}
-function hideStatus() { $('status').className = 'status'; }
-
-function setLoading(on) {
-  const b = $('btnMain');
-  b.classList.toggle('loading', on);
-  b.disabled = on;
-}
-
-function setStep(active, done = []) {
-  [1,2,3].forEach(n => {
-    const el = $('step'+n);
-    el.classList.remove('active','done');
-    if (done.includes(n))  el.classList.add('done');
-    if (active === n)      el.classList.add('active');
-  });
-}
-
-// ─── Читаем ?token= из URL (work.ink возвращает его после checkpoint) ─────────
-const urlParams  = new URLSearchParams(location.search);
-const workToken  = urlParams.get('token') || urlParams.get('work_token');
-let   stage      = workToken ? 'ready' : 'idle';
-
-// Инициализация
-if (stage === 'idle') {
-  setStep(1);
-} else {
-  setStep(2, [1]);
-  $('btnText').textContent = 'Generate Key';
-  showStatus('✓ Checkpoint completed! Click Generate Key.', 'ok');
-}
-
-window.onAction = async function() {
-  if (stage === 'idle') {
-    // Отправляем на work.ink
-    location.href = WORKINK_URL;
-    return;
-  }
-
-  if (stage === 'ready') {
-    setLoading(true);
-    hideStatus();
-    try {
-      const res  = await requestKeyFn({
-        workinkToken: workToken,
-        fingerprint:  getFingerprint(),
-      });
-      const data = res.data;
-      if (data && data.ok && data.key) {
-        $('keyValue').textContent = data.key;
-        const hours = Math.round((data.expiresAt - Date.now()) / 3600000);
-        $('keyTtl').textContent  = (hours > 0 ? hours : 24) + 'h';
-        $('keyBox').classList.add('show');
-        setStep(3, [1,2]);
-        $('btnText').textContent = 'Get Another Key';
-        stage = 'done';
-      } else {
-        showStatus('Could not generate key. Please try again.', 'error');
-      }
-    } catch (e) {
-      const code = (e && e.code || '').replace('functions/','');
-      const msgs = {
-        'already_received_key':     'You already received a key in the last 24 hours. Please wait.',
-        'too_many_keys_from_network': 'Too many keys have been requested from your network today.',
-        'invalid_checkpoint_token': 'Checkpoint token is invalid or expired. Please start over.',
-        'ip_mismatch':              'Network mismatch. The checkpoint was completed from a different network. Please start over from the same network.',
-        'checkpoint_failed':        'Checkpoint verification failed. Please try again.',
-        'permission-denied':        'Access denied. Please complete the checkpoint again.',
-        'resource-exhausted':       'Too many requests. Try again later.',
-      };
-      showStatus(msgs[code] || ('Error: ' + (e.message || 'unknown')), 'error');
-    } finally {
-      setLoading(false);
+ 
+<script>
+  // ══ ЕДИНСТВЕННАЯ СТРОКА КОТОРУЮ НАДО МЕНЯТЬ ══
+  // Вставь сюда URL своего Cloudflare Worker после деплоя
+  const WORKER_URL   = 'https://mooncity-keys.YOUR_SUBDOMAIN.workers.dev';
+  const WORKINK_URL  = 'https://work.ink/2xkx/key-system';
+ 
+  // fingerprint — стабильный ID браузера
+  function getFingerprint() {
+    let fp = localStorage.getItem('mc_fp');
+    if (!fp) {
+      const buf = new Uint8Array(20);
+      crypto.getRandomValues(buf);
+      fp = 'fp_' + Array.from(buf).map(b=>b.toString(16).padStart(2,'0')).join('');
+      localStorage.setItem('mc_fp', fp);
     }
-    return;
+    return fp;
   }
-
-  if (stage === 'done') {
-    // Сброс — отправляем на новый checkpoint
-    location.href = location.pathname;
+ 
+  // Читаем ?token= из URL (work.ink возвращает его после прохождения)
+  const urlParams  = new URLSearchParams(location.search);
+  const workToken  = urlParams.get('token') || urlParams.get('workink_token');
+ 
+  let stage = 'idle'; // idle → ready → done
+ 
+  function setStage(s) {
+    stage = s;
+    document.querySelectorAll('.step').forEach(el => el.classList.remove('active','done'));
+    if (s === 'idle') {
+      document.getElementById('step1').classList.add('active');
+      document.getElementById('btnText').textContent = 'Start Checkpoint';
+    } else if (s === 'ready') {
+      document.getElementById('step1').classList.add('done');
+      document.getElementById('step2').classList.add('active');
+      document.getElementById('btnText').textContent = 'Generate Key';
+    } else if (s === 'done') {
+      document.getElementById('step1').classList.add('done');
+      document.getElementById('step2').classList.add('done');
+      document.getElementById('step3').classList.add('active');
+      document.getElementById('btnText').textContent = 'Open App & Activate';
+    }
   }
-};
-
-window.copyKey = async function() {
-  const key = $('keyValue').textContent.trim();
-  if (!key) return;
-  try {
-    await navigator.clipboard.writeText(key);
-    const b = $('btnCopy');
-    b.classList.add('copied');
-    const orig = b.innerHTML;
-    b.innerHTML = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
-    setTimeout(() => { b.classList.remove('copied'); b.innerHTML = orig; }, 2000);
-  } catch(e) {
-    showStatus('Copy failed — select the key manually.', 'error');
+ 
+  function showStatus(msg, type) {
+    const el = document.getElementById('status');
+    el.className = 'status show ' + (type || 'info');
+    el.textContent = msg;
   }
-};
+  function hideStatus() { document.getElementById('status').className = 'status'; }
+ 
+  function setLoading(on) {
+    const b = document.getElementById('btnAction');
+    b.classList.toggle('loading', on);
+    b.disabled = on;
+  }
+ 
+  async function onAction() {
+    if (stage === 'idle') {
+      // Редиректим на work.ink
+      location.href = WORKINK_URL;
+      return;
+    }
+    if (stage === 'ready') {
+      setLoading(true);
+      hideStatus();
+      try {
+        const res = await fetch(WORKER_URL + '/request-key', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            workinkToken: workToken,
+            fingerprint:  getFingerprint(),
+          }),
+        });
+        const data = await res.json();
+        if (data.ok && data.key) {
+          document.getElementById('keyValue').textContent = data.key;
+          document.getElementById('keyBox').classList.add('show');
+          const h = Math.round((data.expiresAt - Date.now()) / 3600000);
+          document.getElementById('keyTtl').textContent = (h > 0 ? h : 24) + 'h';
+          setStage('done');
+        } else {
+          const msgs = {
+            'You already received': 'You already got a key today. Wait 24 hours.',
+            'Too many keys':        'Too many keys from your network today.',
+            'Checkpoint':           'Checkpoint not completed properly.',
+          };
+          let msg = data.error || 'Error. Try again.';
+          for (const [k,v] of Object.entries(msgs)) {
+            if (msg.includes(k)) { msg = v; break; }
+          }
+          showStatus(msg, 'error');
+        }
+      } catch (e) {
+        showStatus('Connection error. Check internet and try again.', 'error');
+      } finally {
+        setLoading(false);
+      }
+      return;
+    }
+    if (stage === 'done') {
+      // Сбросить для нового ключа
+      location.href = location.pathname;
+    }
+  }
+ 
+  async function copyKey() {
+    const key = document.getElementById('keyValue').textContent.trim();
+    if (!key || key === '—') return;
+    try {
+      await navigator.clipboard.writeText(key);
+      const b = document.getElementById('btnCopy');
+      b.classList.add('copied');
+      b.textContent = '✓ Copied!';
+      setTimeout(() => { b.classList.remove('copied'); b.textContent = '📋 Copy'; }, 2000);
+    } catch(e) {
+      showStatus('Copy failed — select the key manually.', 'error');
+    }
+  }
+ 
+  // Инициализация — если вернулись с work.ink
+  if (workToken) {
+    setStage('ready');
+    showStatus('✓ Checkpoint passed! Click Generate Key.', 'info');
+  } else {
+    setStage('idle');
+  }
 </script>
 </body>
 </html>
+ 
